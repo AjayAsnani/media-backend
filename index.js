@@ -13,13 +13,13 @@ require('dotenv').config(); // Load environment variables
 
 const app = express();
 
-// Ensure important environment variables are loaded
+
 if (!process.env.JWT_SECRET || !process.env.SESSION_SECRET || !process.env.MONGO_URI) {
   console.error('FATAL ERROR: Missing essential environment variables.');
   process.exit(1); // Exit process if important environment variables are missing
 }
 
-// Connect to MongoDB and only start the server if the connection succeeds
+
 connectDB()
   .then(() => {
     console.log('MongoDB connected successfully');
@@ -65,7 +65,7 @@ app.use(session({
 // Routes
 app.use('/api/auth', userRoutes);
 app.use('/api/login', loginRoute);
-app.use('/api/users', require('./routes/userManagement.js'));
+app.use('/api/users', require('./routes/userManagement'));
 app.use('/api/register', require('./routes/registration'));
 app.use('/api/logout', logout);
 
